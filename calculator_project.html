@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>calculator</title>
+    <script src =
+    "https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js">
+     </script>
+    <style>
+        #calculator{
+            background-color: lightgray;
+            margin-top: 80px;
+            margin-left: 430px;
+            border-radius: 7px;
+            height: 480px;
+            width: 500px;
+            padding: 7px;
+        }
+        #heading{
+            height: 44px;
+            padding-left: 167px;
+            color: aliceblue;
+            background-color: black;
+        }
+        #heading h2{
+            padding-top: 5px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+        #display{
+            background-color: rgb(237, 242, 242);
+            height: 90px;
+            border-radius: 3px;
+            margin-top: -25px;
+            
+        }
+        #display h1{
+            font-size: 70px;
+            font-family:Arial, Helvetica, sans-serif;
+            padding-top: 13px;
+            padding-left: 17px;
+        }
+        .buttons{
+            height: 54px;
+            width: 120px; 
+            background-color: rgb(237, 241, 244);
+            margin: 1px;
+            display: inline-block;
+            margin-bottom: 5px;
+        
+        }
+        #button-container{
+            margin-top: 8px;
+
+        }
+        #zero{
+            width: 246px;
+        }
+        #zero span{
+            padding-left: 123px;
+        }
+        .red{
+            background-color: rgb(194, 33, 33);
+        }
+        .buttons span{
+            font-size: x-large;
+            padding-left: 60px;
+            position: relative;
+            top: 15px;
+        }
+        .buttons:hover{
+            background-color: bisque;
+        }
+        .red:hover{
+            background-color: brown;
+        }
+        body{
+            background-image: repeating-radial-gradient(rgb(160, 227, 160),rgb(111, 217, 241));
+        }
+    </style>
+</head>
+<body>
+    <div id="calculator">
+        <div id="heading">
+            <h2>Calculator</h2>
+        </div>
+        <div id="display">
+            <h1 id="entries">0</h1>
+        </div>
+        <div id="button-container">
+            <div class="buttons" id="reset">
+               <span style="padding-left: 53px;">AC</span>
+            </div>
+            <div class="buttons" id="x">
+               <span style="padding-left: 52px;">+/-</span>
+            </div>
+            <div class="buttons" id="percent">
+               <span>%</span>
+            </div>
+            <div class="buttons red" id="divide">
+                <span>/</span>
+             </div>
+             <div class="buttons" id="seven">
+                <span>7</span>
+             </div>
+             <div class="buttons" id="eight">
+                <span>8</span>
+             </div>
+             <div class="buttons" id="nine">
+                <span>9</span>
+             </div>
+             <div class="buttons red" id="multiply">
+                <span>*</span>
+             </div>
+             <div class="buttons" id="four">
+                <span>4</span>
+             </div>
+             <div class="buttons" id="five">
+                <span>5</span>
+             </div>
+             <div class="buttons" id="six">
+                <span>6</span>
+             </div>
+             <div class="buttons red" id="sub">
+                <span>-</span>
+             </div>
+             <div class="buttons" id="one">
+                <span>1</span>
+             </div>
+             <div class="buttons" id="two">
+                <span >2</span>
+             </div>
+             <div class="buttons" id="three">
+                <span>3</span>
+             </div>
+             <div class="buttons red" id="add">
+                <span>+</span>
+             </div>
+             <div id="zero" class="buttons">
+                <span>0</span>
+             </div>
+             <div class="buttons" id="decimal">
+                <span>.</span>
+             </div>
+             <div class="buttons red" id="equal">
+                <span>=</span>
+             </div>
+        </div>
+    </div>
+    <script>
+        var ent=document.getElementById('entries')
+        var reset=document.getElementById('reset')
+        var one=document.getElementById('one')
+        var two=document.getElementById('two')
+        var three=document.getElementById('three')
+        var four=document.getElementById('four')
+        var six=document.getElementById('six')
+        var eight=document.getElementById('eight')
+        var five=document.getElementById('five')
+        var seven=document.getElementById('seven')
+        var nine=document.getElementById('nine')
+        var zero=document.getElementById('zero')
+        var equal=document.getElementById('equal')
+        var add=document.getElementById('add')
+        var decimal=document.getElementById('decimal')
+        var sub=document.getElementById('sub')
+        var multiply=document.getElementById('multiply')
+        var divide=document.getElementById('divide')
+        var percent=document.getElementById('percent')
+        var x=document.getElementById('x')
+        var display=document.getElementById('entries');
+        var op1="";
+        var op2="";
+        var oprnd="";
+        equal.addEventListener('click',function(){
+            if(oprnd=="%"){
+                oprnd="/"
+                var temp="*"
+                op1=eval(op1+oprnd+"100"+temp+op2)
+                display.innerText=op1;
+                console.log(op1)
+                op2=""
+                oprnd=""
+            }
+            else{
+                op1=eval(op1+oprnd+op2)
+                    display.innerText=op1;
+                    console.log(op1)
+                    op2="";
+                    oprnd="";
+                
+            }
+        })
+        reset.addEventListener('click',function(){
+            op1="";
+            op2="";
+            oprnd="";
+            display.innerText="";
+        })
+        add.addEventListener('click',function(){
+            oprnd="+";
+            display.innerText=oprnd;
+        })
+        sub.addEventListener('click',function(){
+            console.log("valeu",op1)
+            if(_.isEmpty(op1)){
+                op1=op1+"-"
+                display.innerText=op1;
+                
+            }
+            else{
+                oprnd="-";
+                display.innerText=""
+                display.innerText=oprnd;
+            }
+        })
+        multiply.addEventListener('click',function(){
+            oprnd="*";
+            display.innerText=oprnd;
+        })
+        divide.addEventListener('click',function(){
+            oprnd="/";
+            display.innerText=oprnd;
+        })
+        percent.addEventListener('click',function(){
+            oprnd="%";
+            display.innerText=oprnd;
+        })
+        decimal.addEventListener('click',function(){
+            if(_.isEmpty(oprnd)){
+                op1=op1+"."
+                console.log(op1)
+                display.innerText=op1;
+            }
+            else{
+                op2=op2+"."
+                console.log(op2)
+                display.innerText=op2;
+            }
+        })
+        zero.addEventListener('click',function(){
+            if(_.isEmpty(oprnd)){
+                op1=op1+0
+                display.innerText=op1;
+            }
+            else{
+                op2=op2+0
+                display.innerText=op2;
+            }
+        })
+        one.addEventListener('click',function(){
+            if(_.isEmpty(oprnd)){
+                op1=op1+1
+                display.innerText=op1;
+            }
+            else{
+                op2=op2+1
+                display.innerText=op2;
+            }
+        })
+        two.addEventListener('click',function(){
+            if(_.isEmpty(oprnd)){
+                op1=op1+2
+                display.innerText=op1;
+            }
+            else{
+                op2=op2+2
+                display.innerText=op2;
+            }
+        })
+        three.addEventListener('click',function(){
+            if(_.isEmpty(oprnd)){
+                op1=op1+3
+                display.innerText=op1;
+            }
+            else{
+                op2=op2+3
+                display.innerText=op2;
+            }
+        })
+        four.addEventListener('click',function(){
+            if(_.isEmpty(oprnd)){
+                op1=op1+4
+                display.innerText=op1;
+            }
+            else{
+                op2=op2+4
+                display.innerText=op2;
+            }
+        })
+        five.addEventListener('click',function(){
+            if(_.isEmpty(oprnd)){
+                op1=op1+5
+                display.innerText=op1;
+            }
+            else{
+                op2=op2+5
+                display.innerText=op2;
+            }
+        })
+        six.addEventListener('click',function(){
+            if(_.isEmpty(oprnd)){
+                op1=op1+6
+                display.innerText=op1;
+            }
+            else{
+                op2=op2+6
+                display.innerText=op2;
+            }
+        })
+        seven.addEventListener('click',function(){
+            if(_.isEmpty(oprnd)){
+                op1=op1+7
+                display.innerText=op1;
+            }
+            else{
+                op2=op2+7
+                display.innerText=op2;
+            }
+        })
+        eight.addEventListener('click',function(){
+            if(_.isEmpty(oprnd)){
+                op1=op1+8
+                display.innerText=op1;
+            }
+            else{
+                op2=op2+8
+                display.innerText=op2;
+            }
+        })
+        nine.addEventListener('click',function(){
+            if(_.isEmpty(oprnd)){
+                op1=op1+9
+                display.innerText=op1;
+            }
+            else{
+                op2=op2+9
+                display.innerText=op2;
+            }
+        })
+
+    </script>
+</body>
+</html>
